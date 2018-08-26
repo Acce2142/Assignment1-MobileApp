@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Assignment2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the mass" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lsa-4b-g2M">
+                                <rect key="frame" x="197.5" y="28" width="148.5" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the angle" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IWn-R3-65G">
+                                <rect key="frame" x="29" y="93" width="145.5" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the acceleration" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QTd-2C-oIY">
+                                <rect key="frame" x="197.5" y="93" width="148.5" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="yes" keyboardType="decimalPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter lever length" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rTC-Ga-Qf1">
+                                <rect key="frame" x="29" y="28" width="145.5" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dlk-2X-UaZ">
+                                <rect key="frame" x="29" y="371" width="308" height="191"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vwX-e7-ELv">
+                                <rect key="frame" x="29" y="206" width="317" height="31"/>
+                                <segments>
+                                    <segment title="Millimetres/Inches"/>
+                                    <segment title="Metres/Feet"/>
+                                </segments>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bsS-U8-jE5">
+                                <rect key="frame" x="76" y="617" width="215" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Reverse engineer a Torque">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="reverseEngineer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dxk-dd-KzK"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a torque" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aVR-Fb-ZZh">
+                                <rect key="frame" x="29" y="262" width="308" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the mass of the object for reverse anaysis" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fNF-Ab-E8R">
+                                <rect key="frame" x="29" y="318" width="308" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sPx-YC-s6a">
+                                <rect key="frame" x="29" y="152" width="317" height="31"/>
+                                <segments>
+                                    <segment title="Metric"/>
+                                    <segment title="Imperial"/>
+                                </segments>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLO-7Z-QoR">
+                                <rect key="frame" x="76" y="579" width="215" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Calculate Torque">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="calculateTorque:" destination="BYZ-38-t0r" eventType="touchUpInside" id="stB-Ya-ZEF"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="dlk-2X-UaZ" secondAttribute="trailing" constant="13" id="0Va-qV-l2b"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lsa-4b-g2M" secondAttribute="trailing" constant="13" id="3Q6-SY-xfz"/>
+                            <constraint firstItem="sPx-YC-s6a" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="13" id="47x-Tg-1Mp"/>
+                            <constraint firstItem="bsS-U8-jE5" firstAttribute="top" secondItem="dLO-7Z-QoR" secondAttribute="bottom" constant="8" id="5Jn-fl-hCN"/>
+                            <constraint firstItem="QTd-2C-oIY" firstAttribute="height" secondItem="rTC-Ga-Qf1" secondAttribute="height" id="5sV-8O-Mcr"/>
+                            <constraint firstItem="fNF-Ab-E8R" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="13" id="7Ei-gN-DT7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bsS-U8-jE5" secondAttribute="trailing" constant="13" id="9Rp-2g-msd"/>
+                            <constraint firstItem="vwX-e7-ELv" firstAttribute="top" secondItem="sPx-YC-s6a" secondAttribute="bottom" constant="28" id="CLV-hO-e8Y"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dLO-7Z-QoR" secondAttribute="trailing" constant="13" id="DGS-pC-xdf"/>
+                            <constraint firstItem="lsa-4b-g2M" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="FIS-RI-E63"/>
+                            <constraint firstItem="vwX-e7-ELv" firstAttribute="width" secondItem="sPx-YC-s6a" secondAttribute="width" id="FZ4-PD-zRY"/>
+                            <constraint firstItem="lsa-4b-g2M" firstAttribute="height" secondItem="rTC-Ga-Qf1" secondAttribute="height" id="H5k-lj-uzM"/>
+                            <constraint firstItem="vwX-e7-ELv" firstAttribute="height" secondItem="sPx-YC-s6a" secondAttribute="height" id="Jc7-wQ-wZE"/>
+                            <constraint firstItem="aVR-Fb-ZZh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="13" id="MXY-wM-2lh"/>
+                            <constraint firstItem="bsS-U8-jE5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="13" id="N7C-ur-WFU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QTd-2C-oIY" secondAttribute="trailing" constant="13" id="QlQ-bt-49L"/>
+                            <constraint firstItem="fNF-Ab-E8R" firstAttribute="top" secondItem="aVR-Fb-ZZh" secondAttribute="bottom" constant="8" id="SfX-3G-pxz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vwX-e7-ELv" secondAttribute="trailing" constant="13" id="Stp-wT-MMb"/>
+                            <constraint firstItem="aVR-Fb-ZZh" firstAttribute="width" secondItem="sPx-YC-s6a" secondAttribute="width" id="T31-Nq-wWw"/>
+                            <constraint firstItem="dLO-7Z-QoR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="13" id="XGg-4a-nY4"/>
+                            <constraint firstItem="dlk-2X-UaZ" firstAttribute="top" secondItem="fNF-Ab-E8R" secondAttribute="bottom" constant="8" id="XhC-kx-3en"/>
+                            <constraint firstItem="lsa-4b-g2M" firstAttribute="leading" secondItem="rTC-Ga-Qf1" secondAttribute="trailing" constant="23" id="YoN-ea-kpr"/>
+                            <constraint firstItem="QTd-2C-oIY" firstAttribute="width" secondItem="rTC-Ga-Qf1" secondAttribute="width" constant="3" id="Z7A-W8-LQh"/>
+                            <constraint firstItem="IWn-R3-65G" firstAttribute="height" secondItem="rTC-Ga-Qf1" secondAttribute="height" id="aI6-n9-xLJ"/>
+                            <constraint firstItem="dlk-2X-UaZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="13" id="aMw-fZ-gRv"/>
+                            <constraint firstItem="IWn-R3-65G" firstAttribute="top" secondItem="rTC-Ga-Qf1" secondAttribute="bottom" constant="35" id="bNc-c9-prU"/>
+                            <constraint firstItem="IWn-R3-65G" firstAttribute="width" secondItem="rTC-Ga-Qf1" secondAttribute="width" id="bZK-D7-GzH"/>
+                            <constraint firstItem="IWn-R3-65G" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="13" id="dyf-a7-zES"/>
+                            <constraint firstItem="QTd-2C-oIY" firstAttribute="leading" secondItem="IWn-R3-65G" secondAttribute="trailing" constant="23" id="f1S-dg-IYQ"/>
+                            <constraint firstItem="QTd-2C-oIY" firstAttribute="leading" secondItem="IWn-R3-65G" secondAttribute="trailing" constant="23" id="fbg-re-Djv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aVR-Fb-ZZh" secondAttribute="trailing" constant="13" id="gnF-kU-YgG"/>
+                            <constraint firstItem="aVR-Fb-ZZh" firstAttribute="height" secondItem="sPx-YC-s6a" secondAttribute="height" id="i2M-42-Bj5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fNF-Ab-E8R" secondAttribute="trailing" constant="13" id="iBO-ua-LPE"/>
+                            <constraint firstItem="sPx-YC-s6a" firstAttribute="top" secondItem="QTd-2C-oIY" secondAttribute="bottom" constant="25" id="iQD-sR-NGO"/>
+                            <constraint firstItem="vwX-e7-ELv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="13" id="kSl-nt-jjU"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bsS-U8-jE5" secondAttribute="bottom" constant="8" id="mK2-Mq-NnA"/>
+                            <constraint firstItem="aVR-Fb-ZZh" firstAttribute="top" secondItem="vwX-e7-ELv" secondAttribute="bottom" constant="30" id="mlT-ZM-V0B"/>
+                            <constraint firstItem="QTd-2C-oIY" firstAttribute="top" secondItem="lsa-4b-g2M" secondAttribute="bottom" constant="35" id="o32-xH-jkV"/>
+                            <constraint firstItem="lsa-4b-g2M" firstAttribute="width" secondItem="rTC-Ga-Qf1" secondAttribute="width" constant="3" id="odU-S7-ihT"/>
+                            <constraint firstItem="dLO-7Z-QoR" firstAttribute="top" secondItem="dlk-2X-UaZ" secondAttribute="bottom" constant="8" id="rnR-Go-0db"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sPx-YC-s6a" secondAttribute="trailing" constant="13" id="sgB-6j-AzR"/>
+                            <constraint firstItem="lsa-4b-g2M" firstAttribute="leading" secondItem="rTC-Ga-Qf1" secondAttribute="trailing" constant="23" id="uzH-xC-Ras"/>
+                            <constraint firstItem="rTC-Ga-Qf1" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="vvs-eJ-MAZ"/>
+                            <constraint firstItem="rTC-Ga-Qf1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="13" id="y30-bR-pUd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="accleration" destination="QTd-2C-oIY" id="l30-af-bOq"/>
+                        <outlet property="angle" destination="IWn-R3-65G" id="4WM-dx-CrU"/>
+                        <outlet property="displayArea" destination="dlk-2X-UaZ" id="FBc-hQ-Z5S"/>
+                        <outlet property="leverLength" destination="rTC-Ga-Qf1" id="Vnf-au-gQH"/>
+                        <outlet property="mass" destination="lsa-4b-g2M" id="mkw-HJ-hXl"/>
+                        <outlet property="massReverseEngineer" destination="fNF-Ab-E8R" id="hZT-3w-4x5"/>
+                        <outlet property="measurementSwitch" destination="sPx-YC-s6a" id="fTh-Ff-dqp"/>
+                        <outlet property="torqueReverseEngineer" destination="aVR-Fb-ZZh" id="ia1-Nz-Ok4"/>
+                        <outlet property="unitSwitch" destination="vwX-e7-ELv" id="jPL-sI-nrs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="112.8" y="22.938530734632685"/>
+        </scene>
+    </scenes>
+</document>
