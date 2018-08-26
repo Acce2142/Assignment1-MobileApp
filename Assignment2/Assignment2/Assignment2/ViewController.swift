@@ -19,6 +19,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var torqueReverseEngineer: UITextField!
     @IBOutlet weak var massReverseEngineer: UITextField!
     @IBOutlet weak var displayArea: UITextView!
+    @IBOutlet weak var lengthUnit: UILabel!
+    @IBOutlet weak var massUnit: UILabel!
+    @IBOutlet weak var accUnit: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         leverLength.delegate? = self;
@@ -46,11 +49,23 @@ class ViewController: UIViewController {
 
     
     @IBAction func calculateTorque(_ sender: Any) {
-        let radius:Double;
-        radius = Double(angle.text!)!*M_PI/180;
-        let force = Double(mass.text!)! * Double(accleration.text!)!
-        let torque = (Double(leverLength.text!)! * force) * sin(radius)
-        displayArea.text = "Lever length: \(leverLength.text!)m\nMass: \(mass.text!)kg\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!)m/s\nTorque: \(torque)N"
+        if(measurementSwitch.selectedSegmentIndex == 0){
+            let radius:Double;
+            radius = Double(angle.text!)!*M_PI/180;
+            let force = Double(mass.text!)! * Double(accleration.text!)!
+            let torque = (Double(leverLength.text!)! * force) * sin(radius)
+            displayArea.text = "Lever length: \(leverLength.text!)m\nMass: \(mass.text!)kg\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!)m/s\nTorque: \(torque)N"
+        }else{
+            lengthUnit.text = "Feet";
+            massUnit.text = "Pound";
+            accUnit.text = "ft/s";
+            let radius:Double;
+            radius = Double(angle.text!)!*M_PI/180;
+            let force = Double(mass.text!)! * Double(accleration.text!)!
+            let torque = (Double(leverLength.text!)! * force) * sin(radius)
+            displayArea.text = "Lever length: \(leverLength.text!)ft\nMass: \(mass.text!)pound\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!)ft/s\nTorque: \(torque)N"
+        }
+        
     }
     
     @IBAction func reverseEngineer(_ sender: Any) {

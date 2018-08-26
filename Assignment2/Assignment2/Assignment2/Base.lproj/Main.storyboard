@@ -23,25 +23,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the mass" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lsa-4b-g2M">
-                                <rect key="frame" x="198" y="28" width="148" height="30"/>
+                                <rect key="frame" x="197.5" y="28" width="148.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the angle" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IWn-R3-65G">
-                                <rect key="frame" x="29" y="93" width="146" height="30"/>
+                                <rect key="frame" x="29" y="93" width="145.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the acceleration" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QTd-2C-oIY">
-                                <rect key="frame" x="198" y="93" width="148" height="30"/>
+                                <rect key="frame" x="197.5" y="93" width="148.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" spellCheckingType="yes" keyboardType="decimalPad"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter lever length" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rTC-Ga-Qf1">
-                                <rect key="frame" x="29" y="28" width="146" height="30"/>
+                                <rect key="frame" x="29" y="28" width="145.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
@@ -99,7 +99,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2G-UZ-g3i">
-                                <rect key="frame" x="29" y="57" width="146" height="15"/>
+                                <rect key="frame" x="29" y="57" width="145.5" height="15"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -110,13 +110,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="m/s" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4i-gX-Ikh">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="kg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4i-gX-Ikh">
                                 <rect key="frame" x="197" y="49" width="149" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="kg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tis-li-Sm2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="m/s" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tis-li-Sm2">
                                 <rect key="frame" x="197" y="114" width="149" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <nil key="textColor"/>
@@ -187,12 +187,15 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="accUnit" destination="tis-li-Sm2" id="D1R-qT-sDe"/>
                         <outlet property="accleration" destination="QTd-2C-oIY" id="l30-af-bOq"/>
                         <outlet property="angle" destination="IWn-R3-65G" id="4WM-dx-CrU"/>
                         <outlet property="displayArea" destination="dlk-2X-UaZ" id="FBc-hQ-Z5S"/>
+                        <outlet property="lengthUnit" destination="x2G-UZ-g3i" id="gKP-wo-L0Q"/>
                         <outlet property="leverLength" destination="rTC-Ga-Qf1" id="Vnf-au-gQH"/>
                         <outlet property="mass" destination="lsa-4b-g2M" id="mkw-HJ-hXl"/>
                         <outlet property="massReverseEngineer" destination="fNF-Ab-E8R" id="hZT-3w-4x5"/>
+                        <outlet property="massUnit" destination="u4i-gX-Ikh" id="4QK-QD-FJx"/>
                         <outlet property="measurementSwitch" destination="sPx-YC-s6a" id="fTh-Ff-dqp"/>
                         <outlet property="torqueReverseEngineer" destination="aVR-Fb-ZZh" id="ia1-Nz-Ok4"/>
                         <outlet property="unitSwitch" destination="vwX-e7-ELv" id="jPL-sI-nrs"/>
