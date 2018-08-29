@@ -59,8 +59,13 @@ class ViewController: UIViewController {
                 lengthTemp =  lengthTemp * 0.305;
                 leverLength.text = String(round(lengthTemp*100)/100);
                 lengthUnit.text = "Meters";
+            } else if(unitSwitch.selectedSegmentIndex == 1){
+                lengthTemp = lengthTemp / 12; //feet
+                lengthTemp = lengthTemp * 0.305; //meters
+                lengthTemp = lengthTemp * 1000; // mm,
+                leverLength.text = String(round(lengthTemp*100)/100);
+                lengthUnit.text = "Inches to mm";
             }
-            
         } else if(measurementSwitch.selectedSegmentIndex == 1){
             var lengthTemp : Double;
             var massTemp : Double;
@@ -73,6 +78,12 @@ class ViewController: UIViewController {
                 lengthTemp = lengthTemp * 3.28084;
                 leverLength.text = String(round(lengthTemp*100)/100);
                 lengthUnit.text = "Feet";
+            } else if(unitSwitch.selectedSegmentIndex == 1){
+                lengthTemp = lengthTemp / 1000;
+                lengthTemp = lengthTemp * 3.28084;
+                lengthTemp = lengthTemp * 12;
+                leverLength.text = String(round(lengthTemp*100)/100);
+                lengthUnit.text = "mm to Inches";
             }
         }
     }
@@ -104,7 +115,7 @@ class ViewController: UIViewController {
             if(unitSwitch.selectedSegmentIndex == 0){
                 var lengthTemp : Double;
                 lengthTemp = Double(leverLength.text!)!;
-                lengthTemp = lengthTemp / 12;
+                lengthTemp = lengthTemp / 12 ;
                 lengthUnit.text = "Feet";
                 leverLength.text = String(round(lengthTemp*100)/100);
             }
@@ -130,24 +141,39 @@ class ViewController: UIViewController {
     @IBAction func calculateTorque(_ sender: Any) {
         let radius:Double;
         radius = Double(angle.text!)!*M_PI/180;
+        var lengthTemp : Double;
+        var massTemp : Double;
+        massTemp = Double(mass.text!)!
+        lengthTemp = Double(leverLength.text!)!
         if(measurementSwitch.selectedSegmentIndex == 0){
+            //mass is in kg
             if(unitSwitch.selectedSegmentIndex == 0){
-                let force = (Double(mass.text!)!) * Double(accleration.text!)!
-                let torque = ((Double(leverLength.text!)!) * force) * sin(radius)
+                //length is in meter
+                let force = massTemp * Double(accleration.text!)!
+                let torque = (lengthTemp * force) * sin(radius)
                 displayArea.text = "Lever length: \(leverLength.text!)m\nMass: \(mass.text!)kg\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!)m/s\nTorque: \(round(torque*100)/100)N"
             } else {
-                let force = (Double(mass.text!)!) * Double(accleration.text!)!
-                let torque = ((Double(leverLength.text!)!/1000) * force) * sin(radius)
+                // length is in mm,
+                let force = massTemp * Double(accleration.text!)!
+                lengthTemp = lengthTemp / 1000;
+                let torque = (lengthTemp * force) * sin(radius)
                 displayArea.text = "Lever length: \(leverLength.text!)mm\nMass: \(mass.text!)kg\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!)mm/s\nTorque: \(round(torque*100)/100)N"
             }
         }else if(measurementSwitch.selectedSegmentIndex == 1){
+            //mass is in pound
             if(unitSwitch.selectedSegmentIndex == 0){
-                let force = (Double(mass.text!)!*0.454) * Double(accleration.text!)!
-                let torque = ((Double(leverLength.text!)!*0.305) * force) * sin(radius)
+                //length is in feet
+                massTemp = massTemp * 0.453592;
+                lengthTemp = lengthTemp * 0.305;
+                let force = massTemp * Double(accleration.text!)!
+                let torque = (lengthTemp * force) * sin(radius)
                 displayArea.text = "Lever length: \(leverLength.text!) ft\nMass: \(mass.text!) pound\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!) m/s\nTorque: \(round(torque*100)/100) N"
             } else {
-                let force = (Double(mass.text!)!*0.454) * Double(accleration.text!)!
-                let torque = ((Double(leverLength.text!)!*0.305/12) * force) * sin(radius)
+                //length is in inches
+                massTemp = massTemp * 0.453592;
+                lengthTemp = lengthTemp / 12 * 0.305;
+                let force = massTemp * Double(accleration.text!)!
+                let torque = (lengthTemp * force) * sin(radius)
                 displayArea.text = "Lever length: \(leverLength.text!) inches\nMass: \(mass.text!) pound\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!) m/s\nTorque: \(round(torque*100)/100) N"
             }
         }
@@ -157,32 +183,47 @@ class ViewController: UIViewController {
         var forceProduce:Double;
         var radius:Double;
         var accele:Double;
+        var lengthTemp : Double;
+        var massTemp : Double;
+        var torqueTemp : Double;
+        radius = Double(angle.text!)!*M_PI/180;
+        // temp values, initially in metric
+        massTemp = Double(massReverseEngineer.text!)!
+        torqueTemp = Double(torqueReverseEngineer.text!)!
+        lengthTemp = Double(leverLength.text!)!
         if(measurementSwitch.selectedSegmentIndex == 0){
+            //mass is in kg
             if(unitSwitch.selectedSegmentIndex == 0){
-                radius = Double(angle.text!)!*M_PI/180;
-                forceProduce = Double(torqueReverseEngineer.text!)! / (Double(leverLength.text!)!*sin(radius))
-                accele = forceProduce / Double(massReverseEngineer.text!)!;
-                displayArea.text = "Given Torque:  \(torqueReverseEngineer.text)N\nLever length: \(leverLength.text)m\nAngle: \(angle.text)°\nMass: \(massReverseEngineer.text)kg\nForce produce:\(forceProduce)N\nExpected Acceleration: \(accele)m/s"
+                //length is in meter
+                forceProduce = torqueTemp / (lengthTemp)
+                accele = forceProduce / massTemp;
+                displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(lengthTemp)m\nAngle: \(angle.text)°\nMass: \(massTemp)kg\nForce produce:\(forceProduce)N\nExpected Acceleration: \(accele)m/s"
             } else {
-                radius = Double(angle.text!)!*M_PI/180;
-                let tempLength = Double(leverLength.text!)!/100;
-                forceProduce = Double(torqueReverseEngineer.text!)! / (tempLength*sin(radius))
-                accele = forceProduce / Double(massReverseEngineer.text!)!;
-                displayArea.text = "Given Torque:  \(torqueReverseEngineer.text)N\nLever length: \(leverLength.text)m\nAngle: \(angle.text)°\nMass: \(massReverseEngineer.text)kg\nForce produce:\(forceProduce)N\nExpected Acceleration: \(accele)m/s"
+                //length is in mm
+                lengthTemp = lengthTemp / 1000;
+                forceProduce = torqueTemp / (lengthTemp )
+                accele = forceProduce / massTemp;
+                displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(Double(leverLength.text!)!)mm\nAngle: \(angle.text)°\nMass: \(massTemp)kg\nForce produce:\(forceProduce)N\nExpected Acceleration: \(accele)m/s"
             }
-            
         }else if(measurementSwitch.selectedSegmentIndex == 1){
+            //mass is in pound
             if(unitSwitch.selectedSegmentIndex == 0){
-                radius = Double(angle.text!)!*M_PI/180;
-                forceProduce = Double(torqueReverseEngineer.text!)! / ((Double(leverLength.text!)!*0.305)*sin(radius))
-                accele = forceProduce / Double(massReverseEngineer.text!)!*0.454;
-                displayArea.text = "Given Torque:  \(torqueReverseEngineer.text)N\nLever length: \(leverLength.text)feet\nAngle: \(angle.text)°\nMass: \(massReverseEngineer.text)pound\nForce produce:\(round(forceProduce*100)/100))N\nExpected Acceleration: \(round(accele*100)/100)m/s"
+                //length is in feet, so we need to convert feet to meters
+                lengthTemp = lengthTemp * 0.305;
+                //mass is in pound, so we need to convert it to kgs
+                massTemp = massTemp * 0.453592;
+                forceProduce = torqueTemp  / (lengthTemp)
+                accele = forceProduce / massTemp;
+                displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(lengthTemp)feet\nAngle: \(angle.text)°\nMass: \(massReverseEngineer.text)pound\nForce produce:\(round(forceProduce*100)/100))N\nExpected Acceleration: \(round(accele*100)/100)m/s"
             } else {
-                radius = Double(angle.text!)!*M_PI/180;
-                let tempLength = Double(leverLength.text!)!/12;
-                forceProduce = Double(torqueReverseEngineer.text!)! / (tempLength*sin(radius))
-                accele = forceProduce / Double(massReverseEngineer.text!)!;
-                displayArea.text = "Given Torque:  \(torqueReverseEngineer.text)N\nLever length: \(leverLength.text)inches\nAngle: \(angle.text)°\nMass: \(massReverseEngineer.text)kg\nForce produce:\(forceProduce)N\nExpected Acceleration: \(accele)m/s"
+                //length is in inches
+                //length is in inches, so we need to convert it to meters
+                lengthTemp = lengthTemp / 12 * 0.305;
+                //mass is in pound, so we need to convert it to kgs
+                massTemp = massTemp * 0.453592;
+                forceProduce = torqueTemp / (lengthTemp)
+                accele = forceProduce / massTemp;
+                displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(leverLength.text)inches\nAngle: \(angle.text)°\nMass: \(massReverseEngineer.text)kg\nForce produce:\(forceProduce)N\nExpected Acceleration: \(accele)m/s"
             }
             
         }
