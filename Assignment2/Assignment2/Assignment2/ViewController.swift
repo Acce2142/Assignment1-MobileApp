@@ -54,8 +54,8 @@ class ViewController: UIViewController {
             massTemp = Double(mass.text!)!;
             lengthTemp =  lengthTemp * 0.305;
             massTemp = massTemp * 0.453592;
-            leverLength.text = String(lengthTemp);
-            mass.text = String(massTemp);
+            leverLength.text = String(round(lengthTemp*100)/100);
+            mass.text = String(round(massTemp*100)/100);
             lengthUnit.text = "Meter";
             massUnit.text = "kg";
         } else if(measurementSwitch.selectedSegmentIndex == 1){
@@ -65,8 +65,8 @@ class ViewController: UIViewController {
             massTemp = Double(mass.text!)!;
             lengthTemp = lengthTemp * 3.28084;
             massTemp = massTemp * 2.20462;
-            leverLength.text = String(lengthTemp);
-            mass.text = String(massTemp);
+            leverLength.text = String(round(lengthTemp*100)/100);
+            mass.text = String(round(massTemp*100)/100);
             lengthUnit.text = "Feet";
             massUnit.text = "Pound";
         }
@@ -74,50 +74,21 @@ class ViewController: UIViewController {
     }
     
     @IBAction func scaleSwitch(_ sender: Any) {
-        //takes mm and m/s, convert to meter and m/s
+        //mm to meters
         if(measurementSwitch.selectedSegmentIndex == 0 && unitSwitch.selectedSegmentIndex == 0){
             var lengthTemp : Double;
-            var accTemp :Double;
             lengthTemp = Double(leverLength.text!)!;
-            accTemp = Double(accleration.text!)!;
             lengthTemp = lengthTemp / 1000;
-            accTemp = accTemp / 1000;
-            leverLength.text = String(accTemp.rounded());
-            accleration.text = String(accTemp.rounded());
             lengthUnit.text = "Meter";
-            //takes meters and m/s. converse to mm and mm/s
+            leverLength.text = String(round(lengthTemp*100)/100);
+        //meter to mm
         } else if(measurementSwitch.selectedSegmentIndex == 0 && unitSwitch.selectedSegmentIndex == 1){
             var lengthTemp : Double;
-            var accTemp :Double;
             lengthTemp = Double(leverLength.text!)!;
-            accTemp = Double(accleration.text!)!;
             lengthTemp = lengthTemp * 1000;
-            accTemp = accTemp * 1000;
-            leverLength.text = String(accTemp.rounded());
-            accleration.text = String(accTemp.rounded());
             lengthUnit.text = "Millimeters";
-            //takes inch, and inch/s. convert to feet, ft/s
-        } else if (measurementSwitch.selectedSegmentIndex == 1 && unitSwitch.selectedSegmentIndex == 0) {
-            var lengthTemp : Double;
-            var accTemp :Double;
-            lengthTemp = Double(leverLength.text!)!;
-            accTemp = Double(accleration.text!)!;
-            //lengthTemp = lengthTemp / 1000;
-            leverLength.text = String(accTemp.rounded());
-            accleration.text = String(accTemp.rounded());
-            lengthUnit.text = "Feet";
-            //takes feet, ft/s, convert to inch, inch/s
-        } else if (measurementSwitch.selectedSegmentIndex == 1 && unitSwitch.selectedSegmentIndex == 1){
-            var lengthTemp : Double;
-            var accTemp :Double;
-            lengthTemp = Double(leverLength.text!)!;
-            accTemp = Double(accleration.text!)!;
-            //lengthTemp = lengthTemp / 1000;
-            leverLength.text = String(accTemp.rounded());
-            accleration.text = String(accTemp.rounded());
-            lengthUnit.text = "Feet";
+            leverLength.text = String(round(lengthTemp*100)/100);
         }
-
     }
  
     
@@ -139,27 +110,45 @@ class ViewController: UIViewController {
     @IBAction func calculateTorque(_ sender: Any) {
         let radius:Double;
         radius = Double(angle.text!)!*M_PI/180;
-        
         if(measurementSwitch.selectedSegmentIndex == 0){
-            let force = (Double(mass.text!)!) * Double(accleration.text!)!
-            let torque = ((Double(leverLength.text!)!) * force) * sin(radius)
-            displayArea.text = "Lever length: \(leverLength.text!)m\nMass: \(mass.text!)kg\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!)m/s\nTorque: \(torque)N"
+            if(unitSwitch.selectedSegmentIndex == 0){
+                let force = (Double(mass.text!)!) * Double(accleration.text!)!
+                let torque = ((Double(leverLength.text!)!) * force) * sin(radius)
+                displayArea.text = "Lever length: \(leverLength.text!)m\nMass: \(mass.text!)kg\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!)m/s\nTorque: \(round(torque*100)/100)N"
+            } else {
+                let force = (Double(mass.text!)!) * Double(accleration.text!)!
+                let torque = ((Double(leverLength.text!)!/1000) * force) * sin(radius)
+                displayArea.text = "Lever length: \(leverLength.text!)mm\nMass: \(mass.text!)kg\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!)mm/s\nTorque: \(round(torque*100)/100)N"
+            }
         }else if(measurementSwitch.selectedSegmentIndex == 1){
-            let force = (Double(mass.text!)!*0.454) * Double(accleration.text!)!
-            let torque = ((Double(leverLength.text!)!*0.305) * force) * sin(radius)
-            displayArea.text = "Lever length: \(leverLength.text!) ft\nMass: \(mass.text!) pound\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!) ft/s\nTorque: \(torque) N"
+            if(unitSwitch.selectedSegmentIndex == 0){
+                let force = (Double(mass.text!)!*0.454) * Double(accleration.text!)!
+                let torque = ((Double(leverLength.text!)!*0.305) * force) * sin(radius)
+                displayArea.text = "Lever length: \(leverLength.text!) ft\nMass: \(mass.text!) pound\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!) m/s\nTorque: \(round(torque*100)/100) N"
+            } else {
+                let force = (Double(mass.text!)!*0.454) * Double(accleration.text!)!
+                let torque = ((Double(leverLength.text!)!*0.305*12) * force) * sin(radius)
+                displayArea.text = "Lever length: \(leverLength.text!) inches\nMass: \(mass.text!) pound\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!) m/s\nTorque: \(round(torque*100)/100) N"
+            }
         }
-        
     }
     
     @IBAction func reverseEngineer(_ sender: Any) {
-        let forceProduce:Double;
-        let radius:Double;
-        let accele:Double;
-        radius = Double(angle.text!)!*M_PI/180;
-        forceProduce = Double(torqueReverseEngineer.text!)! / (Double(leverLength.text!)!*sin(radius))
-        accele = forceProduce / Double(massReverseEngineer.text!)!;
-        displayArea.text = "Given Torque:  \(torqueReverseEngineer.text)N\nLever length: \(leverLength.text)m\nAngle: \(angle.text)°\nMass: \(massReverseEngineer.text)kg\nForce produce:\(forceProduce)N\nExpected Acceleration: \(accele)m/s"
+        var forceProduce:Double;
+        var radius:Double;
+        var accele:Double;
+        if(measurementSwitch.selectedSegmentIndex == 0){
+            radius = Double(angle.text!)!*M_PI/180;
+            forceProduce = Double(torqueReverseEngineer.text!)! / (Double(leverLength.text!)!*sin(radius))
+            accele = forceProduce / Double(massReverseEngineer.text!)!;
+            displayArea.text = "Given Torque:  \(torqueReverseEngineer.text)N\nLever length: \(leverLength.text)m\nAngle: \(angle.text)°\nMass: \(massReverseEngineer.text)kg\nForce produce:\(forceProduce)N\nExpected Acceleration: \(accele)m/s"
+        }else if(measurementSwitch.selectedSegmentIndex == 1){
+            radius = Double(angle.text!)!*M_PI/180;
+            forceProduce = Double(torqueReverseEngineer.text!)! / ((Double(leverLength.text!)!*0.305)*sin(radius))
+            accele = forceProduce / Double(massReverseEngineer.text!)!*0.454;
+            displayArea.text = "Given Torque:  \(torqueReverseEngineer.text)N\nLever length: \(leverLength.text)feet\nAngle: \(angle.text)°\nMass: \(massReverseEngineer.text)pound\nForce produce:\(round(forceProduce*100)/100))N\nExpected Acceleration: \(round(accele*100)/100)m/s"
+        }
+        
     }
     
 }
