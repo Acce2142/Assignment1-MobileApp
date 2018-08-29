@@ -23,25 +23,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the mass" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lsa-4b-g2M">
-                                <rect key="frame" x="197.5" y="28" width="148.5" height="30"/>
+                                <rect key="frame" x="198" y="28" width="148" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the angle" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IWn-R3-65G">
-                                <rect key="frame" x="29" y="93" width="145.5" height="30"/>
+                                <rect key="frame" x="29" y="93" width="146" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the acceleration" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QTd-2C-oIY">
-                                <rect key="frame" x="197.5" y="93" width="148.5" height="30"/>
+                                <rect key="frame" x="198" y="93" width="148" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" spellCheckingType="yes" keyboardType="decimalPad"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter lever length" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rTC-Ga-Qf1">
-                                <rect key="frame" x="29" y="28" width="145.5" height="30"/>
+                                <rect key="frame" x="29" y="28" width="146" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
@@ -55,9 +55,12 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vwX-e7-ELv">
                                 <rect key="frame" x="29" y="206" width="317" height="31"/>
                                 <segments>
-                                    <segment title="Millimetres/Inches"/>
                                     <segment title="Metres/Feet"/>
+                                    <segment title="Millimetres/Inches"/>
                                 </segments>
+                                <connections>
+                                    <action selector="scaleSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="Iwz-yf-J6t"/>
+                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bsS-U8-jE5">
                                 <rect key="frame" x="76" y="617" width="215" height="30"/>
@@ -87,6 +90,9 @@
                                     <segment title="Metric"/>
                                     <segment title="Imperial"/>
                                 </segments>
+                                <connections>
+                                    <action selector="metricSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="GzZ-k1-exu"/>
+                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLO-7Z-QoR">
                                 <rect key="frame" x="76" y="579" width="215" height="30"/>
@@ -99,7 +105,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2G-UZ-g3i">
-                                <rect key="frame" x="29" y="57" width="145.5" height="15"/>
+                                <rect key="frame" x="29" y="57" width="146" height="15"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
