@@ -52,17 +52,13 @@ class ViewController: UIViewController {
             var massTemp : Double;
             lengthTemp = Double(leverLength.text!)!;
             massTemp = Double(mass.text!)!;
-            lengthTemp =  lengthTemp * 0.305;
             massTemp = massTemp * 0.453592;
             mass.text = String(round(massTemp*100)/100);
             massUnit.text = "kg";
             if(unitSwitch.selectedSegmentIndex == 0){
+                lengthTemp =  lengthTemp * 0.305;
                 leverLength.text = String(round(lengthTemp*100)/100);
-                lengthUnit.text = "Meter";
-            } else {
-                lengthTemp = lengthTemp * 1000;
-                leverLength.text = String(round(lengthTemp*100)/100);
-                lengthUnit.text = "Millimeters";
+                lengthUnit.text = "Meters";
             }
             
         } else if(measurementSwitch.selectedSegmentIndex == 1){
@@ -71,22 +67,14 @@ class ViewController: UIViewController {
             lengthTemp = Double(leverLength.text!)!;
             massTemp = Double(mass.text!)!;
             massTemp = massTemp * 2.20462;
+            mass.text = String(round(massTemp*100)/100);
+            massUnit.text = "Pound";
             if(unitSwitch.selectedSegmentIndex == 0){
                 lengthTemp = lengthTemp * 3.28084;
                 leverLength.text = String(round(lengthTemp*100)/100);
-                mass.text = String(round(massTemp*100)/100);
                 lengthUnit.text = "Feet";
-                massUnit.text = "Pound";
-            } else {
-                lengthTemp = lengthTemp * 3.28084/12;
-                leverLength.text = String(round(lengthTemp*100)/100);
-                mass.text = String(round(massTemp*100)/100);
-                lengthUnit.text = "Inches";
-                massUnit.text = "Pound";
             }
-            
         }
-
     }
     
     @IBAction func scaleSwitch(_ sender: Any) {
