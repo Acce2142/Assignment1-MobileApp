@@ -50,35 +50,25 @@ class ViewController: UIViewController {
         if(measurementSwitch.selectedSegmentIndex == 0){
             var lengthTemp : Double;
             var massTemp : Double;
-            var accTemp :Double;
             lengthTemp = Double(leverLength.text!)!;
             massTemp = Double(mass.text!)!;
-            accTemp = Double(accleration.text!)!;
             lengthTemp =  lengthTemp * 0.305;
-            massTemp = massTemp * 0.454;
-            accTemp =  accTemp * 0.304;
-            leverLength.text = String(accTemp.rounded());
-            mass.text = String(massTemp.rounded());
-            accleration.text = String(accTemp.rounded());
+            massTemp = massTemp * 0.453592;
+            leverLength.text = String(lengthTemp);
+            mass.text = String(massTemp);
             lengthUnit.text = "Meter";
             massUnit.text = "kg";
-            accUnit.text = "m/s";
         } else if(measurementSwitch.selectedSegmentIndex == 1){
             var lengthTemp : Double;
             var massTemp : Double;
-            var accTemp :Double;
             lengthTemp = Double(leverLength.text!)!;
             massTemp = Double(mass.text!)!;
-            accTemp = Double(accleration.text!)!;
             lengthTemp = lengthTemp * 3.28084;
-            massTemp = massTemp * 2.205;
-            accTemp = accTemp / 0.327;
-            leverLength.text = String(accTemp.rounded());
-            mass.text = String(massTemp.rounded());
-            accleration.text = String(accTemp.rounded());
+            massTemp = massTemp * 2.20462;
+            leverLength.text = String(lengthTemp);
+            mass.text = String(massTemp);
             lengthUnit.text = "Feet";
             massUnit.text = "Pound";
-            accUnit.text = "ft/s";
         }
 
     }
@@ -90,48 +80,42 @@ class ViewController: UIViewController {
             var accTemp :Double;
             lengthTemp = Double(leverLength.text!)!;
             accTemp = Double(accleration.text!)!;
-            lengthTemp = lengthTemp * 1000;
-            accTemp = accTemp * 1000;
+            lengthTemp = lengthTemp / 1000;
+            accTemp = accTemp / 1000;
             leverLength.text = String(accTemp.rounded());
             accleration.text = String(accTemp.rounded());
             lengthUnit.text = "Meter";
-            accUnit.text = "m/s";
             //takes meters and m/s. converse to mm and mm/s
         } else if(measurementSwitch.selectedSegmentIndex == 0 && unitSwitch.selectedSegmentIndex == 1){
             var lengthTemp : Double;
             var accTemp :Double;
             lengthTemp = Double(leverLength.text!)!;
             accTemp = Double(accleration.text!)!;
-            lengthTemp = lengthTemp / 1000;
-            accTemp = accTemp / 1000;
+            lengthTemp = lengthTemp * 1000;
+            accTemp = accTemp * 1000;
             leverLength.text = String(accTemp.rounded());
             accleration.text = String(accTemp.rounded());
             lengthUnit.text = "Millimeters";
-            accUnit.text = "mm/s";
             //takes inch, and inch/s. convert to feet, ft/s
         } else if (measurementSwitch.selectedSegmentIndex == 1 && unitSwitch.selectedSegmentIndex == 0) {
             var lengthTemp : Double;
             var accTemp :Double;
             lengthTemp = Double(leverLength.text!)!;
             accTemp = Double(accleration.text!)!;
-            lengthTemp = lengthTemp / 1000;
-            accTemp = accTemp / 1000;
+            //lengthTemp = lengthTemp / 1000;
             leverLength.text = String(accTemp.rounded());
             accleration.text = String(accTemp.rounded());
             lengthUnit.text = "Feet";
-            accUnit.text = "ft/s";
             //takes feet, ft/s, convert to inch, inch/s
         } else if (measurementSwitch.selectedSegmentIndex == 1 && unitSwitch.selectedSegmentIndex == 1){
             var lengthTemp : Double;
             var accTemp :Double;
             lengthTemp = Double(leverLength.text!)!;
             accTemp = Double(accleration.text!)!;
-            lengthTemp = lengthTemp / 1000;
-            accTemp = accTemp / 1000;
+            //lengthTemp = lengthTemp / 1000;
             leverLength.text = String(accTemp.rounded());
             accleration.text = String(accTemp.rounded());
             lengthUnit.text = "Feet";
-            accUnit.text = "ft/s";
         }
 
     }
@@ -153,18 +137,17 @@ class ViewController: UIViewController {
 
     
     @IBAction func calculateTorque(_ sender: Any) {
+        let radius:Double;
+        radius = Double(angle.text!)!*M_PI/180;
+        
         if(measurementSwitch.selectedSegmentIndex == 0){
-            let radius:Double;
-            radius = Double(angle.text!)!*M_PI/180;
-            let force = Double(mass.text!)! * Double(accleration.text!)!
-            let torque = (Double(leverLength.text!)! * force) * sin(radius)
+            let force = (Double(mass.text!)!) * Double(accleration.text!)!
+            let torque = ((Double(leverLength.text!)!) * force) * sin(radius)
             displayArea.text = "Lever length: \(leverLength.text!)m\nMass: \(mass.text!)kg\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!)m/s\nTorque: \(torque)N"
-        }else{
-            let radius:Double;
-            radius = Double(angle.text!)!*M_PI/180;
-            let force = Double(mass.text!)! * Double(accleration.text!)!
-            let torque = (Double(leverLength.text!)! * force) * sin(radius)
-            displayArea.text = "Lever length: \(leverLength.text!)ft\nMass: \(mass.text!)pound\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!)ft/s\nTorque: \(torque)N"
+        }else if(measurementSwitch.selectedSegmentIndex == 1){
+            let force = (Double(mass.text!)!*0.454) * Double(accleration.text!)!
+            let torque = ((Double(leverLength.text!)!*0.305) * force) * sin(radius)
+            displayArea.text = "Lever length: \(leverLength.text!) ft\nMass: \(mass.text!) pound\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!) ft/s\nTorque: \(torque) N"
         }
         
     }
