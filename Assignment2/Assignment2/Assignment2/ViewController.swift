@@ -45,13 +45,13 @@ class ViewController: UIViewController {
         massReverseEngineer.text = "1000";
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    //Metric && Imperial measurement switch
     @IBAction func metricSwitch(_ sender: Any) {
+        var lengthTemp : Double;
+        var massTemp : Double;
+        lengthTemp = Double(leverLength.text!)!;
+        massTemp = Double(mass.text!)!;
         if(measurementSwitch.selectedSegmentIndex == 0){
-            var lengthTemp : Double;
-            var massTemp : Double;
-            lengthTemp = Double(leverLength.text!)!;
-            massTemp = Double(mass.text!)!;
             massTemp = massTemp * 0.453592;
             mass.text = String(round(massTemp*100)/100);
             massUnit.text = "kg";
@@ -60,17 +60,14 @@ class ViewController: UIViewController {
                 leverLength.text = String(round(lengthTemp*100)/100);
                 lengthUnit.text = "Meters";
             } else if(unitSwitch.selectedSegmentIndex == 1){
+                //inches to Millimeters
                 lengthTemp = lengthTemp / 12; //feet
                 lengthTemp = lengthTemp * 0.305; //meters
                 lengthTemp = lengthTemp * 1000; // mm,
                 leverLength.text = String(round(lengthTemp*100)/100);
-                lengthUnit.text = "Inches to mm";
+                lengthUnit.text = "Millimeters";
             }
         } else if(measurementSwitch.selectedSegmentIndex == 1){
-            var lengthTemp : Double;
-            var massTemp : Double;
-            lengthTemp = Double(leverLength.text!)!;
-            massTemp = Double(mass.text!)!;
             massTemp = massTemp * 2.20462;
             mass.text = String(round(massTemp*100)/100);
             massUnit.text = "Pound";
@@ -79,42 +76,37 @@ class ViewController: UIViewController {
                 leverLength.text = String(round(lengthTemp*100)/100);
                 lengthUnit.text = "Feet";
             } else if(unitSwitch.selectedSegmentIndex == 1){
-                lengthTemp = lengthTemp / 1000;
-                lengthTemp = lengthTemp * 3.28084;
-                lengthTemp = lengthTemp * 12;
+                //Millimeters to inches
+                lengthTemp = lengthTemp / 1000; //mm to meters
+                lengthTemp = lengthTemp * 3.28084; // meters to feet
+                lengthTemp = lengthTemp * 12; //feet to inches
                 leverLength.text = String(round(lengthTemp*100)/100);
-                lengthUnit.text = "mm to Inches";
+                lengthUnit.text = "Inches";
             }
         }
     }
-    
+    //convert meters to Millimeters or feet to inches
     @IBAction func scaleSwitch(_ sender: Any) {
         //mm to meters
+        var lengthTemp : Double;
+        lengthTemp = Double(leverLength.text!)!;
         if(measurementSwitch.selectedSegmentIndex == 0 && unitSwitch.selectedSegmentIndex == 0){
-            var lengthTemp : Double;
-            lengthTemp = Double(leverLength.text!)!;
             lengthTemp = lengthTemp / 1000;
             lengthUnit.text = "Meter";
             leverLength.text = String(round(lengthTemp*100)/100);
         //meter to mm
         } else if(measurementSwitch.selectedSegmentIndex == 0 && unitSwitch.selectedSegmentIndex == 1){
-                var lengthTemp : Double;
-                lengthTemp = Double(leverLength.text!)!;
                 lengthTemp = lengthTemp * 1000;
                 lengthUnit.text = "Millimeters";
                 leverLength.text = String(round(lengthTemp*100)/100);
         //feet to inches
         } else if(measurementSwitch.selectedSegmentIndex == 1 && unitSwitch.selectedSegmentIndex == 1){
-            var lengthTemp : Double;
-            lengthTemp = Double(leverLength.text!)!;
             lengthTemp = lengthTemp * 12;
             lengthUnit.text = "Inches";
             leverLength.text = String(round(lengthTemp*100)/100);
         //inches to feet
         } else if(measurementSwitch.selectedSegmentIndex == 1){
             if(unitSwitch.selectedSegmentIndex == 0){
-                var lengthTemp : Double;
-                lengthTemp = Double(leverLength.text!)!;
                 lengthTemp = lengthTemp / 12 ;
                 lengthUnit.text = "Feet";
                 leverLength.text = String(round(lengthTemp*100)/100);
@@ -137,7 +129,7 @@ class ViewController: UIViewController {
         
     }
 
-    
+    // calculate the torque
     @IBAction func calculateTorque(_ sender: Any) {
         let radius:Double;
         radius = Double(angle.text!)!*M_PI/180;
@@ -178,7 +170,7 @@ class ViewController: UIViewController {
             }
         }
     }
-    
+    //reverse engineer a torque and calculate the force produce. Then calculate the expected acceleration
     @IBAction func reverseEngineer(_ sender: Any) {
         var forceProduce:Double;
         var radius:Double;
