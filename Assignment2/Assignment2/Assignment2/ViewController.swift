@@ -172,6 +172,7 @@ class ViewController: UIViewController {
     }
     //reverse engineer a torque and calculate the force produce. Then calculate the expected acceleration
     @IBAction func reverseEngineer(_ sender: Any) {
+        //f = T/ sin() /r
         var forceProduce:Double;
         var radius:Double;
         var accele:Double;
@@ -183,17 +184,18 @@ class ViewController: UIViewController {
         massTemp = Double(massReverseEngineer.text!)!
         torqueTemp = Double(torqueReverseEngineer.text!)!
         lengthTemp = Double(leverLength.text!)!
+        //forceproduce = torque / leverlength
         if(measurementSwitch.selectedSegmentIndex == 0){
             //mass is in kg
             if(unitSwitch.selectedSegmentIndex == 0){
                 //length is in meter
-                forceProduce = torqueTemp / (lengthTemp)
+                forceProduce = torqueTemp / sin(radius)/(lengthTemp)
                 accele = forceProduce / massTemp;
                 displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(lengthTemp)m\nAngle: \(angle.text)°\nMass: \(massTemp)kg\nForce produce:\(forceProduce)N\nExpected Acceleration: \(accele)m/s"
             } else {
                 //length is in mm
                 lengthTemp = lengthTemp / 1000;
-                forceProduce = torqueTemp / (lengthTemp )
+                forceProduce = torqueTemp / sin(radius)/(lengthTemp)
                 accele = forceProduce / massTemp;
                 displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(Double(leverLength.text!)!)mm\nAngle: \(angle.text)°\nMass: \(massTemp)kg\nForce produce:\(forceProduce)N\nExpected Acceleration: \(accele)m/s"
             }
@@ -204,7 +206,7 @@ class ViewController: UIViewController {
                 lengthTemp = lengthTemp * 0.305;
                 //mass is in pound, so we need to convert it to kgs
                 massTemp = massTemp * 0.453592;
-                forceProduce = torqueTemp  / (lengthTemp)
+                forceProduce = torqueTemp  / sin(radius)/(lengthTemp)
                 accele = forceProduce / massTemp;
                 displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(lengthTemp)feet\nAngle: \(angle.text)°\nMass: \(massReverseEngineer.text)pound\nForce produce:\(round(forceProduce*100)/100))N\nExpected Acceleration: \(round(accele*100)/100)m/s"
             } else {
@@ -213,7 +215,8 @@ class ViewController: UIViewController {
                 lengthTemp = lengthTemp / 12 * 0.305;
                 //mass is in pound, so we need to convert it to kgs
                 massTemp = massTemp * 0.453592;
-                forceProduce = torqueTemp / (lengthTemp)
+                
+                forceProduce = torqueTemp / sin(radius)/(lengthTemp)
                 accele = forceProduce / massTemp;
                 displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(leverLength.text)inches\nAngle: \(angle.text)°\nMass: \(massReverseEngineer.text)kg\nForce produce:\(forceProduce)N\nExpected Acceleration: \(accele)m/s"
             }
