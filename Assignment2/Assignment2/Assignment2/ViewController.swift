@@ -135,21 +135,28 @@ class ViewController: UIViewController {
         radius = Double(angle.text!)!*M_PI/180;
         var lengthTemp : Double;
         var massTemp : Double;
+        let acc : Double;
+        acc = Double(accleration.text!)!
         massTemp = Double(mass.text!)!
         lengthTemp = Double(leverLength.text!)!
+        if(radius > 1.5708){
+            let alertController = UIAlertController(title: "Invalid degree", message: "You should only input degree in the range of 0-90 degress. If you input degree over that limit, It will still work but might has something weird happens", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }
         if(measurementSwitch.selectedSegmentIndex == 0){
             //mass is in kg
             if(unitSwitch.selectedSegmentIndex == 0){
                 //length is in meter
-                let force = massTemp * Double(accleration.text!)!
+                let force = massTemp * acc
                 let torque = (lengthTemp * force) * sin(radius)
                 displayArea.text = "Lever length: \(leverLength.text!)m\nMass: \(mass.text!)kg\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!)m/s\nTorque: \(round(torque*100)/100)N"
             } else {
                 // length is in mm,
-                let force = massTemp * Double(accleration.text!)!
+                let force = massTemp * acc
                 lengthTemp = lengthTemp / 1000;
                 let torque = (lengthTemp * force) * sin(radius)
-                displayArea.text = "Lever length: \(leverLength.text!)mm\nMass: \(mass.text!)kg\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!)mm/s\nTorque: \(round(torque*100)/100)N"
+                displayArea.text = "Lever length: \(leverLength.text!)mm\nMass: \(mass.text!)kg\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!)m/s\nTorque: \(round(torque*100)/100)N"
             }
         }else if(measurementSwitch.selectedSegmentIndex == 1){
             //mass is in pound
@@ -157,14 +164,14 @@ class ViewController: UIViewController {
                 //length is in feet
                 massTemp = massTemp * 0.453592;
                 lengthTemp = lengthTemp * 0.305;
-                let force = massTemp * Double(accleration.text!)!
+                let force = massTemp * acc
                 let torque = (lengthTemp * force) * sin(radius)
                 displayArea.text = "Lever length: \(leverLength.text!) ft\nMass: \(mass.text!) pound\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!) m/s\nTorque: \(round(torque*100)/100) N"
             } else {
                 //length is in inches
                 massTemp = massTemp * 0.453592;
                 lengthTemp = lengthTemp / 12 * 0.305;
-                let force = massTemp * Double(accleration.text!)!
+                let force = massTemp * acc
                 let torque = (lengthTemp * force) * sin(radius)
                 displayArea.text = "Lever length: \(leverLength.text!) inches\nMass: \(mass.text!) pound\nAngle: \(angle.text!)°\nAcceleration: \(accleration.text!) m/s\nTorque: \(round(torque*100)/100) N"
             }
@@ -172,7 +179,7 @@ class ViewController: UIViewController {
     }
     //reverse engineer a torque and calculate the force produce. Then calculate the expected acceleration
     @IBAction func reverseEngineer(_ sender: Any) {
-        //f = T/ sin() /r
+        //forceproduce = Torque/ sin() /leverlength
         var forceProduce:Double;
         var radius:Double;
         var accele:Double;
@@ -180,11 +187,18 @@ class ViewController: UIViewController {
         var massTemp : Double;
         var torqueTemp : Double;
         radius = Double(angle.text!)!*M_PI/180;
+        
         // temp values, initially in metric
         massTemp = Double(massReverseEngineer.text!)!
         torqueTemp = Double(torqueReverseEngineer.text!)!
         lengthTemp = Double(leverLength.text!)!
-        //forceproduce = torque / leverlength
+        //check whether the degree number is in the range of 0-90
+        if(radius > 1.5708){
+            let alertController = UIAlertController(title: "Invalid degree", message: "You should only input degree in the range of 0-90 degress. If you input degree over that limit, It will still work but something weird might happens", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }
+        //f = m * a
         if(measurementSwitch.selectedSegmentIndex == 0){
             //mass is in kg
             if(unitSwitch.selectedSegmentIndex == 0){
