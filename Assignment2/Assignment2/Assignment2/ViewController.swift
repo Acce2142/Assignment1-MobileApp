@@ -222,7 +222,8 @@ class ViewController: UIViewController {
         var torqueTemp : Double;
         
         // temp values, initially in metric
-        if (massReverseEngineer.text != "" && torqueReverseEngineer.text != "" && leverLength.text != "" && angle.text != "" && accleration.text != "" && mass.text != "" && leverLength.text != "" && angle.text != "")
+        //input validation
+        if (massReverseEngineer.text != "" && torqueReverseEngineer.text != "" && leverLength.text != "" && angle.text != "" && accleration.text != "" && mass.text != "" && leverLength.text != "" && isNumeric(angle.text) == true && isNumeric(massReverseEngineer.text) == true && isNumeric(torqueReverseEngineer.text) == true && isNumeric(leverLength.text) == true)
         {
         radius = Double(angle.text!)!*M_PI/180;
         massTemp = Double(massReverseEngineer.text!)!
@@ -271,6 +272,9 @@ class ViewController: UIViewController {
         
     }
     
+}
+func isNumeric(string: String) -> Bool{
+    return string.rangeOfCharacter(from: NSCharacterSet.decimalDigits) != nil;
 }
 extension ViewController:UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
