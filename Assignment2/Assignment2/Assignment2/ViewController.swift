@@ -183,8 +183,8 @@ class ViewController: UIViewController {
                 massTemp = Double(mass.text!)!
                 lengthTemp = Double(leverLength.text!)!
                 radius = Double(angle.text!)!*M_PI/180;
-                if(radius<0  || radius > 1.5708){
-                    let alertController = UIAlertController(title: "Invalid degree", message: "You should only input degree in the range of 0-90 degress. If you input degree over that limit, It will still work but might has something weird happens", preferredStyle: UIAlertControllerStyle.alert)
+                if(radius < 0  || radius > 1.5708){
+                    let alertController = UIAlertController(title: "Invalid degree", message: "You should only input degree in the range of 0-90 degress. If you input degree over/under that limit, It will still work but something weird might happens", preferredStyle: UIAlertControllerStyle.alert)
                     alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alertController, animated: true, completion: nil)
                 }
