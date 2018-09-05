@@ -32,13 +32,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         leverLength.delegate? = self;
-        leverLength.text = "0";
         mass.delegate? = self;
-        mass.text = "0";
         angle.delegate? = self;
-        angle.text = "90";
         accleration.delegate? = self;
-        accleration.text = "0";
         torqueReverseEngineer.delegate? = self;
         massReverseEngineer.delegate? = self;
         // Do any additional setup after loading the view, typically from a nib.
@@ -92,8 +88,6 @@ class ViewController: UIViewController {
                 massUnit.text = "kg";
                 lengthUnit.text = "Meters";
                 unitSwitch.selectedSegmentIndex = 0;
-                leverLength.text = "0";
-                mass.text = "0";
                 let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric/not-empty", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
@@ -104,8 +98,6 @@ class ViewController: UIViewController {
             massUnit.text = "kg";
             lengthUnit.text = "Meters";
             unitSwitch.selectedSegmentIndex = 0;
-            leverLength.text = "0";
-            mass.text = "0";
             let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric/not-empty", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
@@ -121,7 +113,7 @@ class ViewController: UIViewController {
                 lengthTemp = Double(leverLength.text!)!;
                 if(measurementSwitch.selectedSegmentIndex == 0 && unitSwitch.selectedSegmentIndex == 0){
                     lengthTemp = lengthTemp / 1000;
-                    lengthUnit.text = "Meter";
+                    lengthUnit.text = "Meters";
                     leverLength.text = String(round(lengthTemp*100)/100);
                     //meter to mm
                 } else if(measurementSwitch.selectedSegmentIndex == 0 && unitSwitch.selectedSegmentIndex == 1){
@@ -146,9 +138,7 @@ class ViewController: UIViewController {
                 measurementSwitch.selectedSegmentIndex = 0;
                 unitSwitch.selectedSegmentIndex = 0;
                 massUnit.text = "kg";
-                lengthUnit.text = "Meter";
-                leverLength.text = "0";
-                mass.text = "0";
+                lengthUnit.text = "Meters";
                 let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric/not-empty", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
@@ -157,9 +147,7 @@ class ViewController: UIViewController {
             measurementSwitch.selectedSegmentIndex = 0;
             unitSwitch.selectedSegmentIndex = 0;
             massUnit.text = "kg";
-            lengthUnit.text = "Meter";
-            leverLength.text = "0";
-            mass.text = "0";
+            lengthUnit.text = "Meters";
             let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric/not-empty", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
@@ -195,7 +183,7 @@ class ViewController: UIViewController {
                 massTemp = Double(mass.text!)!
                 lengthTemp = Double(leverLength.text!)!
                 radius = Double(angle.text!)!*M_PI/180;
-                if(radius > 1.5708){
+                if(radius<0  || radius > 1.5708){
                     let alertController = UIAlertController(title: "Invalid degree", message: "You should only input degree in the range of 0-90 degress. If you input degree over that limit, It will still work but might has something weird happens", preferredStyle: UIAlertControllerStyle.alert)
                     alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alertController, animated: true, completion: nil)
