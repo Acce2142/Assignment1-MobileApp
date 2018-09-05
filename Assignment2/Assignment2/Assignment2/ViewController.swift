@@ -32,13 +32,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         leverLength.delegate? = self;
-        leverLength.text = "2";
+        leverLength.text = "0";
         mass.delegate? = self;
-        mass.text = "1000";
+        mass.text = "0";
         angle.delegate? = self;
         angle.text = "90";
         accleration.delegate? = self;
-        accleration.text = "5";
+        accleration.text = "0";
         torqueReverseEngineer.delegate? = self;
         massReverseEngineer.delegate? = self;
         // Do any additional setup after loading the view, typically from a nib.
@@ -49,42 +49,55 @@ class ViewController: UIViewController {
         var massTemp : Double;
         if (leverLength.text != "" && mass.text != "")
         {
-            lengthTemp = Double(leverLength.text!)!;
-            massTemp = Double(mass.text!)!;
-            if(measurementSwitch.selectedSegmentIndex == 0){
-                massTemp = massTemp * 0.453592;
-                mass.text = String(round(massTemp*100)/100);
-                massUnit.text = "kg";
-                if(unitSwitch.selectedSegmentIndex == 0){
-                    lengthTemp =  lengthTemp * 0.305;
-                    leverLength.text = String(round(lengthTemp*100)/100);
-                    lengthUnit.text = "Meters";
-                } else if(unitSwitch.selectedSegmentIndex == 1){
-                    //inches to Millimeters
-                    lengthTemp = lengthTemp / 12; //feet
-                    lengthTemp = lengthTemp * 0.305; //meters
-                    lengthTemp = lengthTemp * 1000; // mm,
-                    leverLength.text = String(round(lengthTemp*100)/100);
-                    lengthUnit.text = "Millimeters";
+            if(isNumeric(string: leverLength.text!) == true && isNumeric(string: mass.text!) == true){
+                lengthTemp = Double(leverLength.text!)!;
+                massTemp = Double(mass.text!)!;
+                if(measurementSwitch.selectedSegmentIndex == 0){
+                    massTemp = massTemp * 0.453592;
+                    mass.text = String(round(massTemp*100)/100);
+                    massUnit.text = "kg";
+                    if(unitSwitch.selectedSegmentIndex == 0){
+                        lengthTemp =  lengthTemp * 0.305;
+                        leverLength.text = String(round(lengthTemp*100)/100);
+                        lengthUnit.text = "Meters";
+                    } else if(unitSwitch.selectedSegmentIndex == 1){
+                        //inches to Millimeters
+                        lengthTemp = lengthTemp / 12; //feet
+                        lengthTemp = lengthTemp * 0.305; //meters
+                        lengthTemp = lengthTemp * 1000; // mm,
+                        leverLength.text = String(round(lengthTemp*100)/100);
+                        lengthUnit.text = "Millimeters";
+                    }
+                } else if(measurementSwitch.selectedSegmentIndex == 1){
+                    massTemp = massTemp * 2.20462;
+                    mass.text = String(round(massTemp*100)/100);
+                    massUnit.text = "Pound";
+                    if(unitSwitch.selectedSegmentIndex == 0){
+                        lengthTemp = lengthTemp * 3.28084;
+                        leverLength.text = String(round(lengthTemp*100)/100);
+                        lengthUnit.text = "Feet";
+                    } else if(unitSwitch.selectedSegmentIndex == 1){
+                        //Millimeters to inches
+                        lengthTemp = lengthTemp / 1000; //mm to meters
+                        lengthTemp = lengthTemp * 3.28084; // meters to feet
+                        lengthTemp = lengthTemp * 12; //feet to inches
+                        leverLength.text = String(round(lengthTemp*100)/100);
+                        lengthUnit.text = "Inches";
+                    }
                 }
-            } else if(measurementSwitch.selectedSegmentIndex == 1){
-                massTemp = massTemp * 2.20462;
-                mass.text = String(round(massTemp*100)/100);
-                massUnit.text = "Pound";
-                if(unitSwitch.selectedSegmentIndex == 0){
-                    lengthTemp = lengthTemp * 3.28084;
-                    leverLength.text = String(round(lengthTemp*100)/100);
-                    lengthUnit.text = "Feet";
-                } else if(unitSwitch.selectedSegmentIndex == 1){
-                    //Millimeters to inches
-                    lengthTemp = lengthTemp / 1000; //mm to meters
-                    lengthTemp = lengthTemp * 3.28084; // meters to feet
-                    lengthTemp = lengthTemp * 12; //feet to inches
-                    leverLength.text = String(round(lengthTemp*100)/100);
-                    lengthUnit.text = "Inches";
-                }
-            }
 
+            } else {
+                //if user does something wrong, reset to meter/metric
+                measurementSwitch.selectedSegmentIndex = 0;
+                massUnit.text = "kg";
+                lengthUnit.text = "Meters";
+                unitSwitch.selectedSegmentIndex = 0;
+                leverLength.text = "0";
+                mass.text = "0";
+                let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric/not-empty", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+            }
         } else {
             //if user does something wrong, reset to meter/metric
             measurementSwitch.selectedSegmentIndex = 0;
@@ -103,31 +116,43 @@ class ViewController: UIViewController {
     @IBAction func scaleSwitch(_ sender: Any) {
         //mm to meters
         var lengthTemp : Double;
-        if (leverLength.text != "" && mass.text != ""){
-            lengthTemp = Double(leverLength.text!)!;
-            if(measurementSwitch.selectedSegmentIndex == 0 && unitSwitch.selectedSegmentIndex == 0){
-                lengthTemp = lengthTemp / 1000;
-                lengthUnit.text = "Meter";
-                leverLength.text = String(round(lengthTemp*100)/100);
-                //meter to mm
-            } else if(measurementSwitch.selectedSegmentIndex == 0 && unitSwitch.selectedSegmentIndex == 1){
-                lengthTemp = lengthTemp * 1000;
-                lengthUnit.text = "Millimeters";
-                leverLength.text = String(round(lengthTemp*100)/100);
-                //feet to inches
-            } else if(measurementSwitch.selectedSegmentIndex == 1 && unitSwitch.selectedSegmentIndex == 1){
-                lengthTemp = lengthTemp * 12;
-                lengthUnit.text = "Inches";
-                leverLength.text = String(round(lengthTemp*100)/100);
-                //inches to feet
-            } else if(measurementSwitch.selectedSegmentIndex == 1){
-                if(unitSwitch.selectedSegmentIndex == 0){
-                    lengthTemp = lengthTemp / 12 ;
-                    lengthUnit.text = "Feet";
+        if (leverLength.text != ""){
+            if(isNumeric(string: leverLength.text!) == true){
+                lengthTemp = Double(leverLength.text!)!;
+                if(measurementSwitch.selectedSegmentIndex == 0 && unitSwitch.selectedSegmentIndex == 0){
+                    lengthTemp = lengthTemp / 1000;
+                    lengthUnit.text = "Meter";
                     leverLength.text = String(round(lengthTemp*100)/100);
+                    //meter to mm
+                } else if(measurementSwitch.selectedSegmentIndex == 0 && unitSwitch.selectedSegmentIndex == 1){
+                    lengthTemp = lengthTemp * 1000;
+                    lengthUnit.text = "Millimeters";
+                    leverLength.text = String(round(lengthTemp*100)/100);
+                    //feet to inches
+                } else if(measurementSwitch.selectedSegmentIndex == 1 && unitSwitch.selectedSegmentIndex == 1){
+                    lengthTemp = lengthTemp * 12;
+                    lengthUnit.text = "Inches";
+                    leverLength.text = String(round(lengthTemp*100)/100);
+                    //inches to feet
+                } else if(measurementSwitch.selectedSegmentIndex == 1){
+                    if(unitSwitch.selectedSegmentIndex == 0){
+                        lengthTemp = lengthTemp / 12 ;
+                        lengthUnit.text = "Feet";
+                        leverLength.text = String(round(lengthTemp*100)/100);
+                    }
                 }
-            }
 
+            } else {
+                measurementSwitch.selectedSegmentIndex = 0;
+                unitSwitch.selectedSegmentIndex = 0;
+                massUnit.text = "kg";
+                lengthUnit.text = "Meter";
+                leverLength.text = "0";
+                mass.text = "0";
+                let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric/not-empty", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+            }
         } else {
             measurementSwitch.selectedSegmentIndex = 0;
             unitSwitch.selectedSegmentIndex = 0;
