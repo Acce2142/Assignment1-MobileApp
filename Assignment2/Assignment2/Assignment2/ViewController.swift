@@ -88,7 +88,7 @@ class ViewController: UIViewController {
                 massUnit.text = "kg";
                 lengthUnit.text = "Meters";
                 unitSwitch.selectedSegmentIndex = 0;
-                let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric/not-empty", preferredStyle: UIAlertControllerStyle.alert)
+                let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             }
@@ -98,7 +98,7 @@ class ViewController: UIViewController {
             massUnit.text = "kg";
             lengthUnit.text = "Meters";
             unitSwitch.selectedSegmentIndex = 0;
-            let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric/not-empty", preferredStyle: UIAlertControllerStyle.alert)
+            let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be not-empty", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }
@@ -139,7 +139,7 @@ class ViewController: UIViewController {
                 unitSwitch.selectedSegmentIndex = 0;
                 massUnit.text = "kg";
                 lengthUnit.text = "Meters";
-                let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric/not-empty", preferredStyle: UIAlertControllerStyle.alert)
+                let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             }
@@ -148,7 +148,7 @@ class ViewController: UIViewController {
             unitSwitch.selectedSegmentIndex = 0;
             massUnit.text = "kg";
             lengthUnit.text = "Meters";
-            let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric/not-empty", preferredStyle: UIAlertControllerStyle.alert)
+            let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be not-empty", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }
@@ -221,11 +221,11 @@ class ViewController: UIViewController {
                     }
                 }
             } else {
-                let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric/not-empty", preferredStyle: UIAlertControllerStyle.alert)
+                let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)            }
         } else {
-            let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric/not-empty", preferredStyle: UIAlertControllerStyle.alert)
+            let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be not-empty", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }
@@ -253,7 +253,7 @@ class ViewController: UIViewController {
                 lengthTemp = Double(leverLength.text!)!
                 //check whether the degree number is in the range of 0-90
                 if(radius > 1.5708){
-                    let alertController = UIAlertController(title: "Invalid degree", message: "You should only input degree in the range of 0-90 degress. If you input degree over that limit, It will still work but something weird might happens", preferredStyle: UIAlertControllerStyle.alert)
+                    let alertController = UIAlertController(title: "Invalid degree", message: "You should only input degree in the range of 0-90 degress. If you input degree over that limit, It will still work but something weid might happens", preferredStyle: UIAlertControllerStyle.alert)
                     alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alertController, animated: true, completion: nil)
                 }
@@ -316,41 +316,13 @@ func highLightSelectedTextFieldEmpty(textfield: UITextField){
     textfield.layer.cornerRadius = 5;
 }
 
-func indicateErrors(){
-    if (massReverseEngineer.text == "" && torqueReverseEngineer.text == "" && angle.text == "" && leverLength.text == "")
-    {
-        if (massReverseEngineer.text != ""){
-            
-        } else if (torqueReverseEngineer.text != ""){
-            
-        } else if (angle.text != ""){
-            
-        } else if (leverLength.text != ""){
-            
-        }
-    } else if(isNumeric(string: angle.text!) == false && isNumeric(string:massReverseEngineer.text!) == false && isNumeric(string:torqueReverseEngineer.text!) == false && isNumeric(string:leverLength.text!) == false){
-        if (isNumeric(string: angle.text!) == false){
-            
-        } else if (isNumeric(string:massReverseEngineer.text!) == false){
-            
-        } else if (isNumeric(string:torqueReverseEngineer.text!) == false){
-            
-        } else if (isNumeric(string:leverLength.text!) == false){
-            
-        } else if (isNumeric(string: angle.text!) == false){
-            
-        }
-    }
-    
-}//check whether the string contains letters
+
+//check whether the string contains letters
 //if it contains letters or white spaces, return false
 //else return true
 func isNumeric(string: String) -> Bool{
-    if(string.rangeOfCharacter(from: NSCharacterSet.letters) != nil || string.rangeOfCharacter(from: NSCharacterSet.whitespaces) != nil){
-        return false;
-    } else {
-        return true;
-    }
+    let nums: Set<Character> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    return Set(string.characters).isSubset(of: nums);
 }
 extension ViewController:UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
