@@ -321,11 +321,8 @@ func highLightSelectedTextFieldEmpty(textfield: UITextField){
 //if it contains letters or white spaces, return false
 //else return true
 func isNumeric(string: String) -> Bool{
-    if(string.rangeOfCharacter(from: NSCharacterSet.letters) != nil || string.rangeOfCharacter(from: NSCharacterSet.whitespaces) != nil){
-        return false;
-    } else {
-        return true;
-    }
+    let nums: Set<Character> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    return Set(string.characters).isSubset(of: nums);
 }
 extension ViewController:UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
