@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment2/ViewController.swift"
-            timestampString = "557827881.76635"
+            timestampString = "558344936.563998"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "ViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -89,11 +89,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment2/ViewController.swift"
-            timestampString = "558329122.073984"
+            timestampString = "558344936.563998"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "363"
+            endingLineNumber = "363"
             landmarkName = "highLightSelectedTextFieldEmpty(textfield:)"
             landmarkType = "9">
          </BreakpointContent>

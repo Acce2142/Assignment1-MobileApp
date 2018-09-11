@@ -43,6 +43,12 @@ class ViewController: UIViewController {
     @IBAction func metricSwitch(_ sender: Any) {
         var lengthTemp : Double;
         var massTemp : Double;
+        deHighLight(textfield: accleration)
+        deHighLight(textfield: mass)
+        deHighLight(textfield: leverLength)
+        deHighLight(textfield: angle)
+        deHighLight(textfield: massReverseEngineer)
+        deHighLight(textfield: torqueReverseEngineer)
         if (leverLength.text != "" && mass.text != "")
         {
             if(isNumeric(string: leverLength.text!) == true && isNumeric(string: mass.text!) == true){
@@ -91,6 +97,8 @@ class ViewController: UIViewController {
                 let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
+                highLightSelectedTextFieldError(textfield: leverLength);
+                highLightSelectedTextFieldError(textfield: mass);
             }
         } else {
             //if user does something wrong, reset to meter/metric
@@ -101,6 +109,8 @@ class ViewController: UIViewController {
             let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be not-empty", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
+            highLightSelectedTextFieldEmpty(textfield: leverLength);
+            highLightSelectedTextFieldEmpty(textfield: mass);
         }
         
     }
@@ -108,6 +118,12 @@ class ViewController: UIViewController {
     @IBAction func scaleSwitch(_ sender: Any) {
         //mm to meters
         var lengthTemp : Double;
+        deHighLight(textfield: accleration)
+        deHighLight(textfield: mass)
+        deHighLight(textfield: leverLength)
+        deHighLight(textfield: angle)
+        deHighLight(textfield: massReverseEngineer)
+        deHighLight(textfield: torqueReverseEngineer)
         if (leverLength.text != ""){
             if(isNumeric(string: leverLength.text!) == true){
                 lengthTemp = Double(leverLength.text!)!;
@@ -142,6 +158,7 @@ class ViewController: UIViewController {
                 let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
+                highLightSelectedTextFieldError(textfield: leverLength);
             }
         } else {
             measurementSwitch.selectedSegmentIndex = 0;
@@ -151,6 +168,7 @@ class ViewController: UIViewController {
             let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be not-empty", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
+            highLightSelectedTextFieldEmpty(textfield: leverLength);
         }
   }
     override func didReceiveMemoryWarning() {
@@ -169,10 +187,18 @@ class ViewController: UIViewController {
 
     // calculate the torque
     @IBAction func calculateTorque(_ sender: Any) {
+        
         let radius:Double;
         var lengthTemp : Double;
         var massTemp : Double;
         let acc : Double;
+        //unhighlight all the textfields
+        deHighLight(textfield: accleration)
+        deHighLight(textfield: mass)
+        deHighLight(textfield: leverLength)
+        deHighLight(textfield: angle)
+        deHighLight(textfield: massReverseEngineer)
+        deHighLight(textfield: torqueReverseEngineer)
         //check the empty strings
         if (accleration.text != "" && mass.text != "" && leverLength.text != "" && angle.text != "")
         {
@@ -223,11 +249,20 @@ class ViewController: UIViewController {
             } else {
                 let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alertController, animated: true, completion: nil)            }
+                self.present(alertController, animated: true, completion: nil)
+                highLightSelectedTextFieldError(textfield: accleration);
+                highLightSelectedTextFieldError(textfield: mass);
+                highLightSelectedTextFieldError(textfield: leverLength);
+                highLightSelectedTextFieldError(textfield: angle);
+            }
         } else {
             let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be not-empty", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
+            highLightSelectedTextFieldEmpty(textfield: accleration);
+            highLightSelectedTextFieldEmpty(textfield: mass);
+            highLightSelectedTextFieldEmpty(textfield: leverLength);
+            highLightSelectedTextFieldEmpty(textfield: angle);
         }
  }
     //reverse engineer a torque and calculate the force produce. Then calculate the expected acceleration
@@ -242,6 +277,13 @@ class ViewController: UIViewController {
         // temp values, initially in metric
         //input validation
         //check empty string
+        //unhighlight all the textfields
+        deHighLight(textfield: accleration)
+        deHighLight(textfield: mass)
+        deHighLight(textfield: leverLength)
+        deHighLight(textfield: angle)
+        deHighLight(textfield: massReverseEngineer)
+        deHighLight(textfield: torqueReverseEngineer)
         if (massReverseEngineer.text != "" && torqueReverseEngineer.text != "" && angle.text != "" && leverLength.text != "")
         {
             //check numeric
@@ -291,12 +333,20 @@ class ViewController: UIViewController {
                 let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
+                highLightSelectedTextFieldError(textfield: massReverseEngineer);
+                highLightSelectedTextFieldError(textfield: torqueReverseEngineer);
+                highLightSelectedTextFieldError(textfield: angle);
+                highLightSelectedTextFieldError(textfield: leverLength);
             }
             
             } else {
             let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must not be empty", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
+            highLightSelectedTextFieldEmpty(textfield: massReverseEngineer);
+            highLightSelectedTextFieldEmpty(textfield: torqueReverseEngineer);
+            highLightSelectedTextFieldEmpty(textfield: angle);
+            highLightSelectedTextFieldEmpty(textfield: leverLength);
         }
         
     }
@@ -316,13 +366,27 @@ func highLightSelectedTextFieldEmpty(textfield: UITextField){
     textfield.layer.cornerRadius = 5;
 }
 
+func deHighLight(textfield: UITextField){
+    textfield.layer.borderColor = UIColor.white.cgColor;
+    textfield.layer.borderWidth = 0;
+    textfield.layer.cornerRadius = 0;
+
+}
+
 
 //check whether the string contains letters
 //if it contains letters or white spaces, return false
 //else return true
 func isNumeric(string: String) -> Bool{
-    let nums: Set<Character> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-    return Set(string.characters).isSubset(of: nums);
+    if(string.rangeOfCharacter(from: NSCharacterSet.decimalDigits) == nil){
+        return false;
+    } else {
+        if(string.rangeOfCharacter(from: NSCharacterSet.letters) != nil || string.rangeOfCharacter(from: NSCharacterSet.whitespaces) != nil){
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
 extension ViewController:UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
