@@ -239,11 +239,10 @@ class ViewController: UIViewController {
         var lengthTemp : Double;
         var massTemp : Double;
         var torqueTemp : Double;
-        
         // temp values, initially in metric
         //input validation
         //check empty string
-        if (massReverseEngineer.text != "" && torqueReverseEngineer.text != "" && leverLength.text != "" && angle.text != "" && accleration.text != "" && mass.text != "" && leverLength.text != "")
+        if (massReverseEngineer.text != "" && torqueReverseEngineer.text != "" && angle.text != "" && leverLength.text != "")
         {
             //check numeric
             if(isNumeric(string: angle.text!) == true && isNumeric(string:massReverseEngineer.text!) == true && isNumeric(string:torqueReverseEngineer.text!) == true && isNumeric(string:leverLength.text!) == true)
@@ -289,22 +288,63 @@ class ViewController: UIViewController {
                 }
 
             } else {
-                let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric/not-empty", preferredStyle: UIAlertControllerStyle.alert)
+                let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             }
             
             } else {
-            let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must be numeric/not-empty", preferredStyle: UIAlertControllerStyle.alert)
+            let alertController = UIAlertController(title: "Invalid value", message: "All the inputs must not be empty", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }
         
     }
     
+    
+}
+func highLightSelectedTextField(textfield: UITextField){
+    textfield.layer.borderColor = UIColor.red.cgColor;
+    textfield.layer.borderWidth = 1;
+    textfield.layer.cornerRadius = 5;
+    
+}
+
+func highLightSelectedTextField(textfield: UITextField){
+    textfield.layer.borderColor = UIColor.gray.cgColor;
+    textfield.layer.borderWidth = 1;
+    textfield.layer.cornerRadius = 5;
+}
+
+func indicateErrors()->Void{
+    if (massReverseEngineer.text == "" && torqueReverseEngineer.text == "" && angle.text == "" && leverLength.text == "")
+    {
+        if (massReverseEngineer.text != ""){
+            
+        } else if (torqueReverseEngineer.text != ""){
+            
+        } else if (angle.text != ""){
+            
+        } else if (leverLength.text != ""){
+            
+        }
+    } else if(isNumeric(string: angle.text!) == false && isNumeric(string:massReverseEngineer.text!) == false && isNumeric(string:torqueReverseEngineer.text!) == false && isNumeric(string:leverLength.text!) == false){
+        if (isNumeric(string: angle.text!) == false){
+            
+        } else if (isNumeric(string:massReverseEngineer.text!) == false){
+            
+        } else if (isNumeric(string:torqueReverseEngineer.text!) == false){
+            
+        } else if (isNumeric(string:leverLength.text!) == false){
+            
+        } else if (isNumeric(string: angle.text!) == false){
+            
+        }
+    }
+    
 }
 //check whether the string contains letters
-//if it contains letters return false
+//if it contains letters or white spaces, return false
 //else return true
 func isNumeric(string: String) -> Bool{
     if(string.rangeOfCharacter(from: NSCharacterSet.letters) != nil || string.rangeOfCharacter(from: NSCharacterSet.whitespaces) != nil){
