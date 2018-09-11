@@ -316,33 +316,7 @@ func highLightSelectedTextFieldEmpty(textfield: UITextField){
     textfield.layer.cornerRadius = 5;
 }
 
-func indicateErrors(){
-    if (massReverseEngineer.text == "" && torqueReverseEngineer.text == "" && angle.text == "" && leverLength.text == "")
-    {
-        if (massReverseEngineer.text != ""){
-            
-        } else if (torqueReverseEngineer.text != ""){
-            
-        } else if (angle.text != ""){
-            
-        } else if (leverLength.text != ""){
-            
-        }
-    } else if(isNumeric(string: angle.text!) == false && isNumeric(string:massReverseEngineer.text!) == false && isNumeric(string:torqueReverseEngineer.text!) == false && isNumeric(string:leverLength.text!) == false){
-        if (isNumeric(string: angle.text!) == false){
-            
-        } else if (isNumeric(string:massReverseEngineer.text!) == false){
-            
-        } else if (isNumeric(string:torqueReverseEngineer.text!) == false){
-            
-        } else if (isNumeric(string:leverLength.text!) == false){
-            
-        } else if (isNumeric(string: angle.text!) == false){
-            
-        }
-    }
-    
-}
+
 //check whether the string contains letters
 //if it contains letters or white spaces, return false
 //else return true
