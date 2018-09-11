@@ -303,20 +303,20 @@ class ViewController: UIViewController {
     
     
 }
-func highLightSelectedTextField(textfield: UITextField){
+func highLightSelectedTextFieldError(textfield: UITextField){
     textfield.layer.borderColor = UIColor.red.cgColor;
     textfield.layer.borderWidth = 1;
     textfield.layer.cornerRadius = 5;
     
 }
 
-func highLightSelectedTextField(textfield: UITextField){
+func highLightSelectedTextFieldEmpty(textfield: UITextField){
     textfield.layer.borderColor = UIColor.gray.cgColor;
     textfield.layer.borderWidth = 1;
     textfield.layer.cornerRadius = 5;
 }
 
-func indicateErrors()->Void{
+func indicateErrors(){
     if (massReverseEngineer.text == "" && torqueReverseEngineer.text == "" && angle.text == "" && leverLength.text == "")
     {
         if (massReverseEngineer.text != ""){
