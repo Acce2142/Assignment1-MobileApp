@@ -293,6 +293,7 @@ class ViewController: UIViewController {
                 massTemp = Double(massReverseEngineer.text!)!
                 torqueTemp = Double(torqueReverseEngineer.text!)!
                 lengthTemp = Double(leverLength.text!)!
+                
                 //check whether the degree number is in the range of 0-90
                 if(radius > 1.5708){
                     let alertController = UIAlertController(title: "Invalid degree", message: "You should only input degree in the range of 0-90 degress. If you input degree over that limit, It will still work but something weid might happens", preferredStyle: UIAlertControllerStyle.alert)
@@ -306,12 +307,12 @@ class ViewController: UIViewController {
                         //length is in meter
                         forceProduce = torqueTemp / sin(radius)/(lengthTemp)
                         accele = forceProduce / massTemp;
-                        displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(leverLength.text)m\nAngle: \(angle.text)°\nMass: \(massTemp)kg\nForce produce:\(round(forceProduce*100)/100)N\nExpected Acceleration: \(accele)m/s"
+                        displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(leverLength.text!)m\nAngle: \(angle.text!)°\nMass: \(massTemp)kg\nForce produce:\(round(forceProduce*100)/100)N\nExpected Acceleration: \(accele)m/s"
                     } else {
                         //length is in mm
                         forceProduce = torqueTemp / sin(radius)/(lengthTemp)
                         accele = forceProduce / massTemp;
-                        displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(leverLength.text)mm\nAngle: \(angle.text)°\nMass: \(massTemp)kg\nForce produce:\(round(forceProduce*100)/100)N\nExpected Acceleration: \(accele)m/s"
+                        displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(leverLength.text!)mm\nAngle: \(angle.text!)°\nMass: \(massTemp)kg\nForce produce:\(round(forceProduce*100)/100)N\nExpected Acceleration: \(accele)m/s"
                     }
                 }else if(measurementSwitch.selectedSegmentIndex == 1){
                     //mass is in pound
@@ -320,11 +321,11 @@ class ViewController: UIViewController {
                     if(unitSwitch.selectedSegmentIndex == 0){
                         forceProduce = torqueTemp  / sin(radius)/(lengthTemp)
                         accele = forceProduce / massTemp;
-                        displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(leverLength.text)feet\nAngle: \(angle.text)°\nMass: \(massReverseEngineer.text)pound\nForce produce:\(round(forceProduce*100)/100))N\nExpected Acceleration: \(round(accele*100)/100)m/s"
+                        displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(leverLength.text!)feet\nAngle: \(angle.text!)°\nMass: \(massReverseEngineer.text)pound\nForce produce:\(round(forceProduce*100)/100))N\nExpected Acceleration: \(round(accele*100)/100)m/s"
                     } else {
                         forceProduce = torqueTemp / sin(radius)/(lengthTemp)
                         accele = forceProduce / massTemp;
-                        displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(leverLength.text)inches\nAngle: \(angle.text)°\nMass: \(massReverseEngineer.text)kg\nForce produce:\(round(forceProduce*100)/100)N\nExpected Acceleration: \(accele)m/s"
+                        displayArea.text = "Given Torque:  \(torqueTemp)N\nLever length: \(leverLength.text!)inches\nAngle: \(angle.text!)°\nMass: \(massReverseEngineer.text)kg\nForce produce:\(round(forceProduce*100)/100)N\nExpected Acceleration: \(accele)m/s"
                     }
                     
                 }
@@ -353,19 +354,20 @@ class ViewController: UIViewController {
     
     
 }
+// highlight the text field with red boarder
 func highLightSelectedTextFieldError(textfield: UITextField){
     textfield.layer.borderColor = UIColor.red.cgColor;
     textfield.layer.borderWidth = 1;
     textfield.layer.cornerRadius = 5;
     
 }
-
+// highlight the text field with gray boarder
 func highLightSelectedTextFieldEmpty(textfield: UITextField){
     textfield.layer.borderColor = UIColor.gray.cgColor;
     textfield.layer.borderWidth = 1;
     textfield.layer.cornerRadius = 5;
 }
-
+// unhighlight the text field with red boarder
 func deHighLight(textfield: UITextField){
     textfield.layer.borderColor = UIColor.white.cgColor;
     textfield.layer.borderWidth = 0;
